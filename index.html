@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Zombie RPG FPS Online (Prototype)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Top HUD -->
+  <div id="hudTop">
+    <div class="chip" id="hpChip">HP: <span id="hp">100</span></div>
+    <div class="chip" id="armorChip">Armor: <span id="armor">0</span></div>
+    <div class="chip" id="waveChip">Wave: <span id="wave">1</span></div>
+    <div class="chip" id="cashChip">$<span id="cash">0</span></div>
+    <div class="chip" id="pingChip">Ping: <span id="ping">--</span>ms</div>
+
+    <button id="btnSettings" class="btnIcon" title="Settings">⚙</button>
+  </div>
+
+  <!-- Crosshair -->
+  <div id="crosshair">
+    <div class="cx"></div><div class="cy"></div>
+  </div>
+
+  <!-- Canvas -->
+  <canvas id="game"></canvas>
+
+  <!-- Bottom HUD -->
+  <div id="hudBottom">
+    <div id="weaponPanel" class="panel">
+      <div class="weaponName" id="weaponName">Pistol</div>
+      <div class="ammoRow">
+        <span class="ammoBig" id="ammo">12</span>
+        <span class="ammoSmall">/</span>
+        <span class="ammoSmall" id="ammoReserve">48</span>
+      </div>
+      <div class="tiny" id="weaponTip">LMB shoot • RMB ADS • R reload • Shift sprint</div>
+    </div>
+
+    <div id="miniPanel" class="panel">
+      <div class="tinyTitle">Minimap (prototype)</div>
+      <canvas id="minimap" width="160" height="120"></canvas>
+    </div>
+  </div>
+
+  <!-- Start / Join Overlay -->
+  <div id="overlay" class="overlay">
+    <div class="card">
+      <div class="title">Zombie RPG FPS (Prototype)</div>
+      <div class="subtitle">Raycast FPS + COD-style gun feel. Multiplayer-ready structure.</div>
+
+      <div class="row">
+        <label class="lab">Name</label>
+        <input id="playerName" class="inp" maxlength="16" placeholder="Player" />
+      </div>
+
+      <div class="row">
+        <label class="lab">Mode</label>
+        <div class="seg">
+          <button id="modeSolo" class="segBtn segOn">Solo</button>
+          <button id="modeOnline" class="segBtn">Online (soon)</button>
+        </div>
+      </div>
+
+      <div id="onlineBlock" class="row hidden">
+        <label class="lab">Room Code</label>
+        <input id="roomCode" class="inp" maxlength="10" placeholder="AB12" />
+        <div class="tiny">Online will be enabled in Phase 2 (server + WebSockets).</div>
+      </div>
+
+      <button id="btnPlay" class="btnPrimary">Play</button>
+
+      <div class="tiny foot">
+        Tip: click Play then click the game to lock mouse. Press <b>Esc</b> to unlock.
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Overlay -->
+  <div id="settings" class="overlay hidden">
+    <div class="card">
+      <div class="title">Settings</div>
+      <div class="subtitle">Quick tweaks for feel.</div>
+
+      <div class="row">
+        <label class="lab">Mouse Sensitivity</label>
+        <input id="sens" class="rng" type="range" min="0.3" max="3.0" step="0.05" value="1.25" />
+        <span class="tiny" id="sensVal">1.25</span>
+      </div>
+
+      <div class="row">
+        <label class="lab">FOV</label>
+        <input id="fov" class="rng" type="range" min="55" max="95" step="1" value="75" />
+        <span class="tiny" id="fovVal">75</span>
+      </div>
+
+      <div class="row">
+        <label class="lab">Graphics</label>
+        <div class="seg">
+          <button id="gfxLow" class="segBtn">Low</button>
+          <button id="gfxMed" class="segBtn segOn">Med</button>
+          <button id="gfxHigh" class="segBtn">High</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="btnCloseSettings" class="btnGhost">Close</button>
+      </div>
+
+      <div class="tiny foot">
+        These settings save locally on your device.
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="game.js"></script>
+</body>
+</html>
